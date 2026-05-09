@@ -76,6 +76,13 @@ export default function Home() {
     });
   };
 
+  const handleCompareSubmit = () => {
+    if (compareList.length >= 2) {
+      const ids = compareList.map(c => c.id).join(",");
+      router.push(`/compare?ids=${ids}`);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-[#0a0a0a] text-slate-900 dark:text-white transition-colors font-sans flex flex-col">
       <header className="bg-white dark:bg-[#0a0a0a] border-b border-slate-200 dark:border-white/10 sticky top-0 z-40 transition-colors">
