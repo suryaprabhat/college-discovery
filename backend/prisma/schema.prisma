@@ -1,0 +1,63 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model College {
+  id                String   @id @default(uuid())
+  name              String
+  location          String
+  fees              Float
+  rating            Float
+  placement_percent Float
+  description       String
+  image_url         String
+  students_placed   Int?     @default(0)
+  top_companies     String?  
+  established_year  Int?
+  recent_updates    String?
+  standout_features String?
+  
+  history           String?
+  faculty_info      String?
+  history_bg_image  String?
+  faculty_bg_image  String?
+  courses_bg_image  String?
+
+  courses           Course[]
+  placement_stats   PlacementStat[]
+  comments          Comment[]
+}
+
+model Course {
+  id        String   @id @default(uuid())
+  collegeId String
+  name      String
+  duration  Int
+  fees      Float
+  college   College  @relation(fields: [collegeId], references: [id])
+}
+
+model PlacementStat {
+  id                String   @id @default(uuid())
+  collegeId         String
+  year              Int
+  placement_percent Float
+  students_placed   Int      @default(0)
+  average_package   Float    
+  college           College  @relation(fields: [collegeId], references: [id])
+}
+
+model Comment {
+  id        String   @id @default(uuid())
+  collegeId String
+  author    String
+  text      String
+  createdAt DateTime @default(now())
+  college   College  @relation(fields: [collegeId], references: [id], onDelete: Cascade)
+}
+
