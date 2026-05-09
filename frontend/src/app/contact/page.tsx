@@ -1,3 +1,5 @@
+"use client";
+
 import { Footer } from "@/components/footer";
 import { Mail, Phone, MapPin, Send, ArrowLeft } from "lucide-react";
 import Link from "next/link";
