@@ -6,6 +6,7 @@ import axios from "axios";
 import { MapPin, DollarSign, Star, ArrowLeft, GraduationCap, TrendingUp, Calendar, ArrowDown, MessageSquare, Send } from "lucide-react";
 import Link from "next/link";
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip, ResponsiveContainer, BarChart, Bar } from "recharts";
+import API_BASE from "@/lib/api";
 
 interface Course {
   id: string;
@@ -65,7 +66,7 @@ export default function CollegeDetails() {
     if (!id) return;
     const fetchCollege = async () => {
       try {
-        const res = await axios.get(`http://localhost:3001/api/colleges/${id}`);
+        const res = await axios.get(`${API_BASE}/api/colleges/${id}`);
         setCollege(res.data);
       } catch (error) {
         console.error("Error fetching college details", error);
@@ -80,7 +81,7 @@ export default function CollegeDetails() {
     if (!newComment.trim()) return;
     setSubmittingComment(true);
     try {
-      const res = await axios.post(`http://localhost:3001/api/colleges/${id}/comments`, {
+      const res = await axios.post(`${API_BASE}/api/colleges/${id}/comments`, {
         author: "Guest Student",
         text: newComment.trim()
       });

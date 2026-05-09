@@ -7,6 +7,7 @@ import Link from "next/link";
 import { ArrowLeft, Star, MapPin, CheckCircle, Award, Briefcase, BookOpen, Activity, DollarSign } from "lucide-react";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { Footer } from "@/components/footer";
+import API_BASE from "@/lib/api";
 
 interface Course {
   id: string;
@@ -53,7 +54,7 @@ function CompareContent() {
     const fetchCompareData = async () => {
       try {
         setLoading(true);
-        const res = await axios.get(`http://localhost:3001/api/colleges/compare?ids=${ids}`);
+        const res = await axios.get(`${API_BASE}/api/colleges/compare?ids=${ids}`);
         setColleges(res.data);
       } catch (error) {
         console.error("Error fetching comparison data", error);

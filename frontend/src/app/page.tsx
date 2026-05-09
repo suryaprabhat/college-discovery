@@ -7,6 +7,7 @@ import { Search, MapPin, DollarSign, Star, ArrowRight, Activity, Plus, Check, X,
 import { useRouter } from "next/navigation";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { Footer } from "@/components/footer";
+import API_BASE from "@/lib/api";
 
 interface College {
   id: string;
@@ -47,7 +48,7 @@ export default function Home() {
       if (maxFees) params.append("maxFees", maxFees);
       if (collection) params.append("collection", collection);
 
-      const res = await axios.get(`http://localhost:3001/api/colleges?${params.toString()}`);
+      const res = await axios.get(`${API_BASE}/api/colleges?${params.toString()}`);
       setColleges(res.data);
     } catch (error) {
       console.error("Error fetching colleges", error);
